@@ -11,20 +11,20 @@ using System.IO.Ports;
 
 namespace EV3Controller
 {
-    public partial class Form1 : Form
+    public partial class Controller : Form
     {
         /// <summary>
         /// 画面表示状態
         /// </summary>
-        enum status
+        enum ConnectStatus
         {
             NoConnect ,Connect
         }
 
         private SerialPort myPort;
-        private status displayStatus;
+        private ConnectStatus connectStatus;
 
-        public Form1()
+        public Controller()
         {
             InitializeComponent();
         }
@@ -46,8 +46,8 @@ namespace EV3Controller
                 myPort = new SerialPort(PortName, BaudRate, Parity, DataBits, StopBits);
                 myPort.Open();
 
-                this.displayStatus = status.Connect;
-                changeStatus();
+                this.connectStatus = ConnectStatus.Connect;
+                ChangeStatus();
             }
             catch(Exception ex)
             {
@@ -66,8 +66,8 @@ namespace EV3Controller
             {
                 myPort.Close();
 
-                this.displayStatus = status.NoConnect;
-                changeStatus();
+                this.connectStatus = ConnectStatus.NoConnect;
+                ChangeStatus();
             }
             catch(Exception ex)
             {
@@ -90,26 +90,26 @@ namespace EV3Controller
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Form1_Load(object sender, EventArgs e)
+        private void Controller_Load(object sender, EventArgs e)
         {
-            this.displayStatus = status.NoConnect;
-            changeStatus();
+            this.connectStatus = ConnectStatus.NoConnect;
+            ChangeStatus();
         }
 
         /// <summary>
         /// 状態遷移
         /// </summary>
-        private void changeStatus()
+        private void ChangeStatus()
         {
-            switch (this.displayStatus)
+            switch (this.connectStatus)
             {
-                case status.NoConnect :
+                case ConnectStatus.NoConnect :
                     this.Connect.Enabled = true;
                     this.PortNameTaxtBox.Enabled = true;
                     this.Send.Enabled = false;
                     this.Close.Enabled = false;
                     break;
-                case status.Connect : 
+                case ConnectStatus.Connect : 
                     this.Connect.Enabled = false;
                     this.PortNameTaxtBox.Enabled = false;
                     this.Send.Enabled = true;

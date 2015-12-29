@@ -1,6 +1,6 @@
 ﻿namespace EV3Controller
 {
-    partial class Form1
+    partial class Controller
     {
         /// <summary>
         /// 必要なデザイナー変数です。
@@ -81,7 +81,7 @@
             this.PortNameTaxtBox.Size = new System.Drawing.Size(100, 19);
             this.PortNameTaxtBox.TabIndex = 10;
             // 
-            // Form1
+            // Controller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -91,9 +91,9 @@
             this.Controls.Add(this.Close);
             this.Controls.Add(this.Send);
             this.Controls.Add(this.Connect);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Name = "Controller";
+            this.Text = "Controller";
+            this.Load += new System.EventHandler(this.Controller_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
