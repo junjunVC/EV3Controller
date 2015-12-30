@@ -76,13 +76,58 @@ namespace EV3Controller
         }
 
         /// <summary>
-        /// EV3への送信(発信指示)
+        /// EV3への送信(停止指示)
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Send_Click(object sender, EventArgs e)
+        private void Stop_Click(object sender, EventArgs e)
+        {
+            myPort.Write("0");
+            this.DisplayLabel.Text = "STOP";
+        }
+
+        /// <summary>
+        /// EV3への送信(前進指示)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Forward_Click(object sender, EventArgs e)
         {
             myPort.Write("1");
+            this.DisplayLabel.Text = "FORWARD";
+        }
+
+        /// <summary>
+        /// EV3への送信(後退指示)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Back_Click(object sender, EventArgs e)
+        {
+            myPort.Write("2");
+            this.DisplayLabel.Text = "BACK";
+        }
+
+        /// <summary>
+        /// EV3への送信(左旋回指示)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Left_Click(object sender, EventArgs e)
+        {
+            myPort.Write("3");
+            this.DisplayLabel.Text = "LEFT";
+        }
+
+        /// <summary>
+        /// EV3への送信(右旋回指示)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Right_Click(object sender, EventArgs e)
+        {
+            myPort.Write("4");
+            this.DisplayLabel.Text = "RIGHT";
         }
 
         /// <summary>
@@ -106,18 +151,27 @@ namespace EV3Controller
                 case ConnectStatus.NoConnect :
                     this.Connect.Enabled = true;
                     this.PortNameTaxtBox.Enabled = true;
-                    this.Send.Enabled = false;
+                    this.Stop.Enabled = false;
+                    this.Forward.Enabled = false;
+                    this.Back.Enabled = false;
+                    this.Left.Enabled = false;
+                    this.Right.Enabled = false;
                     this.Close.Enabled = false;
                     break;
                 case ConnectStatus.Connect : 
                     this.Connect.Enabled = false;
                     this.PortNameTaxtBox.Enabled = false;
-                    this.Send.Enabled = true;
+                    this.Stop.Enabled = true;
+                    this.Forward.Enabled = true;
+                    this.Back.Enabled = true;
+                    this.Left.Enabled = true;
+                    this.Right.Enabled = true;
                     this.Close.Enabled = true;
                     break;
                 default:
                     break;
             }
         }
+
     }
 }
